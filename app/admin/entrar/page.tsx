@@ -37,7 +37,7 @@ export default function Entrar() {
           </div>
 
           {estado?.mensagem && (
-            <p role="alert" className="text-sm text-ouro">
+            <p role="alert" className="text-sm text-aviso">
               {estado.mensagem}
             </p>
           )}

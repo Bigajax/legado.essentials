@@ -101,3 +101,13 @@ export const ficha = [
   { rotulo: "Etiqueta", valor: "Tecida na gola e na barra" },
   { rotulo: "Origem", valor: "Brasil" },
 ] as const;
+
+/** As frases da faixa rotativa. Curtas: elas passam andando. */
+export const faixa = [
+  "Interlock Pima",
+  "215 g/m²",
+  "Bordado exclusivo",
+  "Acabamento premium",
+  "Feito no Brasil",
+  "Feito para durar",
+] as const;

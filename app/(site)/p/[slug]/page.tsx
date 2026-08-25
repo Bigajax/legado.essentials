@@ -114,8 +114,8 @@ export default async function PaginaPeca({ params }: Props) {
             <Catalogo pecas={outras} />
 
             <div className="mt-16 text-center">
-              <Link href="/" className="btn btn-linha">
-                Ver tudo
+              <Link href="/catalogo" className="btn btn-linha">
+                Ver o catálogo
               </Link>
             </div>
           </div>

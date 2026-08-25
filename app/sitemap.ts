@@ -7,6 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     { url: site.url, lastModified: new Date(), priority: 1 },
+    { url: `${site.url}/catalogo`, lastModified: new Date(), priority: 0.8 },
     ...pecas.map((p) => ({
       url: `${site.url}/p/${p.slug}`,
       lastModified: new Date(p.criadoEm),

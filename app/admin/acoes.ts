@@ -41,11 +41,16 @@ export async function acaoSair(): Promise<void> {
 /**
  * Cria ou atualiza. O que decide é o campo oculto `id`: vazio = peça nova.
  * Uma action só para os dois casos porque o formulário é o mesmo.
+ *
+ * Não redireciona: quem chama é um modal, que fecha sozinho quando a resposta
+ * vem `ok`. A lista atrás dele se atualiza pelo `revalidatePath`.
  */
 export async function acaoSalvarPeca(
   _anterior: Resposta | null,
   dados: FormData,
 ): Promise<Resposta> {
+  let criou = false;
+
   try {
     await exigirAdmin();
 
@@ -114,17 +119,22 @@ export async function acaoSalvarPeca(
       ordem: paraNumero(dados.get("ordem")) ?? 99,
     };
 
-    if (id) await repo().atualizarPeca(id, campos);
-    else await repo().criarPeca(campos);
+    if (id) {
+      await repo().atualizarPeca(id, campos);
+    } else {
+      await repo().criarPeca(campos);
+      criou = true;
+    }
 
     revalidatePath("/", "layout");
-    return { ok: true, mensagem: id ? "Peça salva." : "Peça criada." };
   } catch (e) {
     return comoResposta(e);
   }
+
+  return { ok: true, mensagem: criou ? "Peça criada." : "Peça salva." };
 }
 
-/** Remove de vez. O painel confirma antes de chamar. */
+/** Remove de vez. O botão confirma antes de chamar. */
 export async function acaoRemoverPeca(dados: FormData): Promise<void> {
   await exigirAdmin();
   const id = String(dados.get("id") ?? "").trim();

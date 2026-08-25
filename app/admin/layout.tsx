@@ -10,5 +10,5 @@ export default function LayoutAdmin({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="min-h-screen bg-carvao text-creme">{children}</div>;
+  return <div className="min-h-screen bg-creme text-carvao">{children}</div>;
 }

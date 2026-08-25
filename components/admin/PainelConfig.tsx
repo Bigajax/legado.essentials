@@ -67,7 +67,7 @@ export default function PainelConfig({ config }: { config: Config }) {
       {estado?.mensagem && (
         <p
           role="status"
-          className={`text-sm ${estado.ok ? "text-ouro-claro" : "text-ouro"}`}
+          className={`text-sm ${estado.ok ? "text-certo" : "text-aviso"}`}
         >
           {estado.mensagem}
         </p>

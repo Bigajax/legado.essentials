@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { repo } from "@/lib/repo";
 import {
@@ -7,12 +8,14 @@ import {
   pilares,
   ficha,
   fichaDestaque,
+  faixa,
 } from "@/data/site.config";
 import { coresAtivas, pecaDestaque } from "@/lib/types";
 
 import Reveal from "@/components/site/Reveal";
 import Hero from "@/components/site/Hero";
 import Catalogo from "@/components/site/Catalogo";
+import Faixa from "@/components/site/Faixa";
 
 export const revalidate = 60;
 
@@ -37,8 +40,10 @@ export default async function Home() {
       {/* 1 — O hero É a peça ---------------------------------------------- */}
       <Hero peca={peca} numero={numero} />
 
-      {/* 2 — Manifesto: a faixa escura ------------------------------------ */}
+      {/* 2 — Manifesto, aberto pela faixa rotativa ------------------------ */}
       <section className="bg-carvao text-creme">
+        <Faixa itens={faixa} />
+
         <div className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-36">
           <Reveal>
             <p className="eyebrow eyebrow-inicio">
@@ -69,7 +74,7 @@ export default async function Home() {
       </section>
 
       {/* 3 — O catálogo, ou a cartela de cores quando só existe uma peça -- */}
-      <section className="border-b border-carvao/10 bg-creme-2">
+      <section id="cartela" className="border-b border-carvao/10 bg-creme-2">
         <div className="mx-auto max-w-[1400px] px-5 py-20 md:px-10 md:py-28">
           <Reveal>
             <div className="flex flex-wrap items-end justify-between gap-8">
@@ -100,7 +105,14 @@ export default async function Home() {
           </Reveal>
 
           {catalogo ? (
-            <Catalogo pecas={pecas} />
+            <>
+              <Catalogo pecas={pecas} />
+              <div className="mt-16 text-center">
+                <Link href="/catalogo" className="btn btn-linha">
+                  Ver o catálogo
+                </Link>
+              </div>
+            </>
           ) : (
             <div className="mt-14 grid grid-cols-2 gap-x-5 gap-y-12 md:mt-20 md:grid-cols-4 md:gap-x-8">
               {cores.map((c, i) => (

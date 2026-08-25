@@ -163,7 +163,7 @@ export default function FormPeca({
       </section>
 
       {/* tamanhos -------------------------------------------------------- */}
-      <section className="border-t border-ouro/15 pt-8">
+      <section className="border-t border-carvao/10 pt-8">
         <span className="rotulo mb-4 block">Tamanhos</span>
         <div className="flex flex-wrap gap-2">
           {TAMANHOS.map((t) => (
@@ -186,7 +186,7 @@ export default function FormPeca({
       </section>
 
       {/* cores ----------------------------------------------------------- */}
-      <section className="border-t border-ouro/15 pt-8">
+      <section className="border-t border-carvao/10 pt-8">
         <span className="rotulo mb-1 block">Cores</span>
         <p className="mb-6 text-xs leading-relaxed text-areia">
           Desligar uma cor tira ela da vitrine sem apagar a foto. O fundo é o
@@ -198,7 +198,7 @@ export default function FormPeca({
             <li
               key={c.slug}
               className={`border p-3 transition-opacity ${
-                c.ativa ? "border-ouro/45" : "border-creme/10 opacity-50"
+                c.ativa ? "border-ouro/45" : "border-carvao/12 opacity-50"
               }`}
             >
               <CampoFoto
@@ -274,7 +274,7 @@ export default function FormPeca({
       </section>
 
       {/* publicação ------------------------------------------------------ */}
-      <section className="flex flex-col gap-4 border-t border-ouro/15 pt-8">
+      <section className="flex flex-col gap-4 border-t border-carvao/10 pt-8">
         <label className="flex items-center gap-3 text-sm">
           <input
             type="checkbox"
@@ -299,7 +299,7 @@ export default function FormPeca({
       {estado?.mensagem && (
         <p
           role="status"
-          className={`text-sm ${estado.ok ? "text-ouro-claro" : "text-[#d98a6a]"}`}
+          className={`text-sm ${estado.ok ? "text-certo" : "text-aviso"}`}
         >
           {estado.mensagem}
         </p>
@@ -395,7 +395,7 @@ function CampoFoto({
         className="hidden"
       />
 
-      {erro && <p className="mt-2 text-[0.6875rem] text-[#d98a6a]">{erro}</p>}
+      {erro && <p className="mt-2 text-[0.6875rem] text-aviso">{erro}</p>}
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { useEffect, useRef, type ReactNode } from "react";
  * Modal em `<dialog>` nativo: foco preso, Esc e backdrop vêm de graça, sem
  * uma linha de JavaScript de acessibilidade escrita à mão.
  */
-export default function ModalPeca({
+export default function Modal({
   aberto,
   titulo,
   descricao,
@@ -30,7 +30,6 @@ export default function ModalPeca({
 
     if (aberto && !dialogo.open) {
       dialogo.showModal();
-      // reabrir para outra peça precisa começar do topo
       corpo.current?.scrollTo({ top: 0 });
       dialogo
         .querySelector<HTMLElement>("input, textarea, button")
@@ -49,12 +48,10 @@ export default function ModalPeca({
       className="dialogo m-auto"
     >
       <div className="flex max-h-[inherit] flex-col">
-        <header className="flex items-start justify-between gap-6 border-b border-ouro/15 px-6 py-5">
+        <header className="flex items-start justify-between gap-6 border-b border-carvao/10 px-6 py-5">
           <div>
-            <h2 className="display text-2xl text-creme">{titulo}</h2>
-            {descricao && (
-              <p className="mt-1 text-xs text-areia">{descricao}</p>
-            )}
+            <h2 className="display text-2xl text-carvao">{titulo}</h2>
+            {descricao && <p className="mt-1 text-xs text-areia">{descricao}</p>}
           </div>
           <button
             type="button"
@@ -71,7 +68,7 @@ export default function ModalPeca({
         </div>
 
         {rodape && (
-          <footer className="flex flex-wrap items-center gap-4 border-t border-ouro/15 px-6 py-4">
+          <footer className="flex flex-wrap items-center gap-4 border-t border-carvao/10 px-6 py-4">
             {rodape}
           </footer>
         )}

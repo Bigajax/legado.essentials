@@ -102,10 +102,6 @@ export default function Hero({ peca, numero }: { peca: Peca; numero: string }) {
             Comprar no WhatsApp
           </a>
 
-          <p className="mt-4 max-w-md text-xs leading-relaxed text-carvao/55">
-            A mensagem já vai com a cor {cor?.nome.toLowerCase()}
-            {tamanho ? ` e o tamanho ${tamanho}` : ""}.
-          </p>
         </div>
 
         {/* ---------------------------------------------------------- peça */}

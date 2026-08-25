@@ -22,32 +22,46 @@ export default function Cabecalho({ numero }: { numero: string }) {
         preso ? "bg-creme/92 backdrop-blur-sm" : ""
       }`}
     >
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-5 py-4 md:px-10">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-5 py-3 md:px-10 md:py-4">
+        {/*
+          O lockup inteiro aparece no celular também. Escondê-lo deixava só a
+          árvore solta na barra, e uma marca nova não pode contar com o
+          símbolo sozinho para ser reconhecida.
+        */}
         <Link
           href="/"
           aria-label={`${site.nome} ${site.sufixo}, início`}
-          className="flex items-center gap-4"
+          className="flex items-center gap-3 md:gap-4"
         >
-          <Logo parte="arvore" altura={38} prioridade />
-          <span className="hidden sm:block">
-            <Logo parte="lettering" altura={16} />
-            <span className="rotulo mt-1 block text-[0.5625rem] tracking-[0.42em]">
+          <Logo parte="arvore" altura={34} prioridade />
+          <span className="block">
+            <Logo parte="lettering" altura={14} />
+            <span className="rotulo mt-1 block text-[0.5rem] tracking-[0.34em] md:text-[0.5625rem] md:tracking-[0.42em]">
               {site.sufixo}
             </span>
           </span>
         </Link>
 
         <nav className="flex items-center gap-7">
-          <Link href="/#topo" className="rotulo transition-colors hover:text-carvao">
-            A peça
+          <Link
+            href="/catalogo"
+            className="rotulo hidden transition-colors hover:text-carvao sm:inline"
+          >
+            Catálogo
           </Link>
+
+          {/*
+            O botão existe no celular também. Antes era `hidden md:inline-flex`,
+            então a barra ficava sem nenhuma ação justo onde a compra acontece.
+          */}
           <a
             href={waGeral(numero)}
             target="_blank"
             rel="noreferrer"
-            className="btn btn-linha hidden md:inline-flex"
+            className="btn btn-linha btn-barra"
           >
-            Falar com a gente
+            <span className="sm:hidden">WhatsApp</span>
+            <span className="hidden sm:inline">Falar com a gente</span>
           </a>
         </nav>
       </div>

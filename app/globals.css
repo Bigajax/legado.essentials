@@ -11,6 +11,10 @@
   --creme: #f4f1ea;
   --creme-2: #e8e3d8;
   --areia: #6f6858;
+
+  /* respostas do painel: legíveis sobre creme, dentro da paleta da marca */
+  --certo: #4f6440;
+  --aviso: #9c3b21;
   --verde: #3d4032;
 }
 
@@ -22,6 +26,8 @@
   --color-creme: var(--creme);
   --color-creme-2: var(--creme-2);
   --color-areia: var(--areia);
+  --color-certo: var(--certo);
+  --color-aviso: var(--aviso);
   --color-verde: var(--verde);
 
   --font-display: var(--font-cormorant), Georgia, serif;
@@ -168,7 +174,7 @@ body {
   font-size: 0.5625rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--ouro-claro);
+  color: var(--ouro);
 }
 
 /*
@@ -352,24 +358,29 @@ body {
   cursor: progress;
 }
 
-/* Ação em texto: menos peso que um botão, para editar/remover na lista. */
+/*
+ * Ação em texto: menos peso que um botão, para editar/remover na lista.
+ * Herda a cor da superfície, como .campo, então serve no claro e no escuro.
+ */
 .acao {
   font-family: var(--font-body);
   font-size: 0.75rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--creme) 70%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--ouro) 40%, transparent);
+  color: color-mix(in srgb, currentColor 68%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--ouro) 45%, transparent);
   padding-bottom: 2px;
-  transition: color 0.3s, border-color 0.3s;
+  transition:
+    color 0.3s,
+    border-color 0.3s;
 }
 .acao:hover {
-  color: var(--ouro-claro);
-  border-color: var(--ouro-claro);
+  color: var(--ouro);
+  border-color: var(--ouro);
 }
 .acao-risco:hover {
-  color: #d98a6a;
-  border-color: #d98a6a;
+  color: var(--aviso);
+  border-color: var(--aviso);
 }
 
 /* Modal nativo: ganha foco preso, Esc e backdrop de graça. */
@@ -377,13 +388,13 @@ body {
   width: min(46rem, calc(100vw - 2rem));
   max-height: min(88vh, 56rem);
   padding: 0;
-  border: 1px solid color-mix(in srgb, var(--ouro) 30%, transparent);
-  background: var(--carvao);
-  color: var(--creme);
+  border: 1px solid color-mix(in srgb, var(--ouro) 40%, transparent);
+  background: var(--creme);
+  color: var(--carvao);
   overflow: hidden;
 }
 .dialogo::backdrop {
-  background: rgb(0 0 0 / 0.72);
+  background: rgb(13 13 12 / 0.55);
   backdrop-filter: blur(2px);
 }
 .dialogo[open] {
@@ -580,5 +591,112 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .cor-cartela {
     transition: none;
+  }
+}
+
+/* ---------- painel: abas ---------- */
+
+/*
+ * Aba do painel. Marcada por um fio dourado embaixo, não por caixa cheia:
+ * é a mesma gramática de filete que a vitrine usa.
+ */
+.aba {
+  padding: 0.9rem 0;
+  border-bottom: 2px solid transparent;
+  font-size: 0.6875rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--areia);
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+.aba:hover {
+  color: var(--carvao);
+}
+.aba[data-on="true"] {
+  border-bottom-color: var(--ouro);
+  color: var(--carvao);
+}
+
+/* ---------- faixa rotativa ---------- */
+
+/*
+ * A faixa mora no topo do bloco escuro, então é ela que abre o manifesto:
+ * a página está andando quando a frase chega. Uma pista só, de propósito.
+ */
+.faixa {
+  overflow: hidden;
+  padding-block: 1.15rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--ouro) 22%, transparent);
+}
+
+.faixa-trilho {
+  display: flex;
+  width: max-content;
+  animation: faixa-anda 52s linear infinite;
+}
+.faixa:hover .faixa-trilho {
+  animation-play-state: paused;
+}
+
+.faixa-fila {
+  display: flex;
+  align-items: center;
+}
+
+.faixa-item {
+  display: flex;
+  align-items: center;
+  gap: 2.75rem;
+  padding-right: 2.75rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--creme) 72%, transparent);
+}
+
+/* o losango é o mesmo nó que separa as coisas no resto do site */
+.faixa-item::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex: none;
+  background: var(--ouro-claro);
+  transform: rotate(45deg);
+}
+
+@keyframes faixa-anda {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faixa-trilho {
+    animation: none;
+  }
+}
+
+/* ---------- botão de barra ---------- */
+
+/*
+ * O botão do cabeçalho. No celular ele divide a barra com o logotipo, então
+ * aperta o tracking e o padding para caber sem espremer a marca; do `sm`
+ * para cima volta a ser um botão normal.
+ *
+ * Declarado depois de `.btn` de propósito: é ele que precisa ganhar.
+ */
+.btn-barra {
+  min-height: 2.5rem;
+  padding: 0.55rem 0.95rem;
+  letter-spacing: 0.16em;
+}
+@media (min-width: 640px) {
+  .btn-barra {
+    min-height: 2.75rem;
+    padding: 0.8rem 1.8rem;
+    letter-spacing: 0.28em;
   }
 }
