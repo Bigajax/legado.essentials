@@ -619,66 +619,6 @@ body {
   color: var(--carvao);
 }
 
-/* ---------- faixa rotativa ---------- */
-
-/*
- * A faixa mora no topo do bloco escuro, então é ela que abre o manifesto:
- * a página está andando quando a frase chega. Uma pista só, de propósito.
- */
-.faixa {
-  overflow: hidden;
-  padding-block: 1.15rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--ouro) 22%, transparent);
-}
-
-.faixa-trilho {
-  display: flex;
-  width: max-content;
-  animation: faixa-anda 52s linear infinite;
-}
-.faixa:hover .faixa-trilho {
-  animation-play-state: paused;
-}
-
-.faixa-fila {
-  display: flex;
-  align-items: center;
-}
-
-.faixa-item {
-  display: flex;
-  align-items: center;
-  gap: 2.75rem;
-  padding-right: 2.75rem;
-  font-size: 0.6875rem;
-  letter-spacing: 0.36em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: color-mix(in srgb, var(--creme) 72%, transparent);
-}
-
-/* o losango é o mesmo nó que separa as coisas no resto do site */
-.faixa-item::after {
-  content: "";
-  width: 6px;
-  height: 6px;
-  flex: none;
-  background: var(--ouro-claro);
-  transform: rotate(45deg);
-}
-
-@keyframes faixa-anda {
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .faixa-trilho {
-    animation: none;
-  }
-}
-
 /* ---------- botão de barra ---------- */
 
 /*
@@ -698,5 +638,85 @@ body {
     min-height: 2.75rem;
     padding: 0.8rem 1.8rem;
     letter-spacing: 0.28em;
+  }
+}
+
+/* ---------- faixa rotativa ---------- */
+
+/*
+ * A faixa é a etiqueta tecida da marca: dourada, entre o creme do hero e o
+ * carvão do manifesto. São três faixas de cor empilhadas, e é essa quebra
+ * que dá ritmo à página.
+ *
+ * Duas vozes na mesma pista: o fato técnico em caixa alta e o refrão em
+ * serifa itálica. Uma fila só de especificação viraria tabela andando.
+ */
+.faixa {
+  overflow: hidden;
+  padding-block: 0.85rem;
+  background: var(--ouro);
+  color: var(--carvao);
+}
+
+.faixa-trilho {
+  display: flex;
+  width: max-content;
+  animation: faixa-anda 58s linear infinite;
+}
+.faixa:hover .faixa-trilho {
+  animation-play-state: paused;
+}
+
+.faixa-fila {
+  display: flex;
+  align-items: center;
+}
+
+.faixa-item {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding-right: 2.5rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* o refrão da marca: mesma pista, outra voz */
+.faixa-serifa {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.0625rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+/*
+ * O separador é a árvore do logotipo, recortada em máscara e pintada de
+ * carvão. Máscara e não <img> porque o arquivo é dourado: sobre a faixa
+ * dourada ele sumiria, e assim a arte real vira silhueta sem precisar de
+ * uma segunda versão do logotipo.
+ */
+.faixa-item::after {
+  content: "";
+  flex: none;
+  width: 15px;
+  height: 14px;
+  background: var(--carvao);
+  opacity: 0.5;
+  -webkit-mask: url("/marca/legado-arvore.png") center / contain no-repeat;
+  mask: url("/marca/legado-arvore.png") center / contain no-repeat;
+}
+
+@keyframes faixa-anda {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faixa-trilho {
+    animation: none;
   }
 }

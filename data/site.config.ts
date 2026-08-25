@@ -102,12 +102,18 @@ export const ficha = [
   { rotulo: "Origem", valor: "Brasil" },
 ] as const;
 
-/** As frases da faixa rotativa. Curtas: elas passam andando. */
+/**
+ * As frases da faixa rotativa.
+ *
+ * `voz` mistura duas tipografias na mesma pista: o fato técnico em caixa
+ * alta e o refrão da marca em serifa itálica. É o que impede a faixa de
+ * virar uma fila monótona de especificações.
+ */
 export const faixa = [
-  "Interlock Pima",
-  "215 g/m²",
-  "Bordado exclusivo",
-  "Acabamento premium",
-  "Feito no Brasil",
-  "Feito para durar",
+  { texto: "Interlock Pima", voz: "caps" },
+  { texto: "215 g/m²", voz: "caps" },
+  { texto: "Feito para durar", voz: "serifa" },
+  { texto: "Bordado exclusivo", voz: "caps" },
+  { texto: "Acabamento premium", voz: "caps" },
+  { texto: "Feito no Brasil", voz: "caps" },
 ] as const;
