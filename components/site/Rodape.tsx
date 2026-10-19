@@ -72,6 +72,12 @@ export default function Rodape({ config }: { config: Config }) {
             © {new Date().getFullYear()} {site.nome} {site.sufixo}. {site.slogan}
           </span>
           <span>O pedido é fechado no WhatsApp.</span>
+          <span>
+            vitrine por{" "}
+            <a href="https://rafaelrazeira.com.br/vitrine-digital" target="_blank" rel="noopener" className="transition-colors hover:text-ouro-claro">
+              Rafael Razeira Estúdio
+            </a>
+          </span>
         </div>
       </div>
     </footer>
